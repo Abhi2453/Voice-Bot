@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Mic, MicOff, Volume2, VolumeX, Sparkles, Send } from 'lucide-react';
+import { Mic, MicOff, Volume2, VolumeX, Sparkles, Send, Bot, MessagesSquare } from 'lucide-react';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
 
 export default function VoiceBot() {
   const [isListening, setIsListening] = useState(false);
@@ -184,180 +186,168 @@ Achievements & Engagements
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white font-sans">
-      {/* Animated background elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" 
-             style={{ animationDuration: '4s' }}></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" 
-             style={{ animationDuration: '6s', animationDelay: '1s' }}></div>
-      </div>
+    <div className="min-h-screen bg-[#1f2121] text-orange-900 font-sans">
+      {/* Simple solid background */}
+      <div className="fixed inset-0 bg-[#1f2121] pointer-events-none"></div>
 
-      <div className="relative z-10 max-w-4xl mx-auto p-6 flex flex-col h-screen">
-        {/* Header */}
-        <header className="text-center py-8 mb-6">
-          <div className="flex items-center justify-center gap-3 mb-3">
-            <Sparkles className="w-8 h-8 text-purple-400 animate-pulse" />
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent"
-                style={{ fontFamily: "'Space Grotesk', 'Outfit', sans-serif" }}>
-              AI Voice Interview Bot
-            </h1>
-            <Sparkles className="w-8 h-8 text-blue-400 animate-pulse" style={{ animationDelay: '0.5s' }} />
+      <div className="relative z-10 max-w-8xl mx-auto flex gap-6 h-screen px-6 py-2">
+        {/* Left Sidebar - Header */}
+        <div className="w-64 flex flex-col border-[#D4A5A5] justify-between">
+          <div className="py-6 pr-6">
+            <div className="flex items-center gap-2 mb-4">
+              <Bot className="w-7 h-7 text-white" />
+              <h1 className="text-2xl font-bold text-white"
+                  style={{ fontFamily: "'Space Grotesk', 'Outfit', sans-serif" }}>
+                Lohit Abhiram
+              </h1>
+            </div>
+            <p className="text-white text-sm font-semibold" style={{ fontFamily: "'Inter', sans-serif" }}>
+              AI Developer Voice Assistant
+            </p>
+            <p className="text-white text-xs mt-3">
+              Ask me about my background, skills, and experience
+            </p>
           </div>
-          <p className="text-purple-200 text-lg" style={{ fontFamily: "'Inter', sans-serif" }}>
-            100x Generative AI Developer Assessment
-          </p>
-          <p className="text-purple-300/70 text-sm mt-2">
-            Ask me about my background, skills, and experience
-          </p>
-        </header>
+          <div className="flex-1 mt-55 justify-end items-center border-[#D4A5A5]">
+             <DotLottieReact
+                src="https://lottie.host/6c1820fe-c480-46ce-a287-655c002e1cfc/xTR8vykqhS.lottie"
+                loop
+                autoplay
+                speed={2}
+              />
+          </div>
+          
+        </div>
 
-        {/* Chat Messages */}
-        <div className="flex-1 overflow-y-auto mb-6 space-y-4 bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 shadow-2xl">
-          {messages.length === 0 && (
-            <div className="text-center py-12 text-purple-300/60">
-              <Mic className="w-16 h-16 mx-auto mb-4 opacity-50" />
-              <p className="text-lg">Start by clicking the microphone or typing your question</p>
-              <div className="mt-6 text-left max-w-md mx-auto space-y-2 text-sm">
-                <p className="font-semibold text-purple-200">Try asking:</p>
-                <ul className="space-y-1 text-purple-300/80">
-                  <li>• What should I know about your life story?</li>
-                  <li>• What's your #1 superpower?</li>
-                  <li>• What are the top 3 areas you'd like to grow in?</li>
-                  <li>• What misconception do coworkers have about you?</li>
-                  <li>• How do you push your boundaries?</li>
-                </ul>
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col">
+          {/* Chat Messages */}
+          <div className="flex-1 overflow-y-auto mb-6 space-y-4 bg-[#191a1a] rounded-2xl p-6 border border-[#2b2d2d] shadow-sm">
+            {messages.length === 0 && (
+              <div className="text-center py-35 text-white">
+                <MessagesSquare className="w-16 h-16 mx-auto mb-4 opacity-20 animate-bounce text-white" />
+                <p className="text-lg font-medium">Start by clicking the microphone or typing your question</p>
+                <div className="mt-6 text-left max-w-md mx-auto space-y-2 text-sm">
+                  <p className="font-semibold text-white">Try asking:</p>
+                  <ul className="space-y-1 text-white">
+                    <li>• What should I know about your life story?</li>
+                    <li>• What's your #1 superpower?</li>
+                    <li>• What are the top 3 areas you'd like to grow in?</li>
+                    <li>• What misconception do coworkers have about you?</li>
+                    <li>• How do you push your boundaries?</li>
+                  </ul>
+                </div>
               </div>
-            </div>
-          )}
-          
-          {messages.map((msg, idx) => (
-            <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-fadeIn`}>
-              <div className={`max-w-[80%] rounded-2xl px-5 py-3 ${
-                msg.role === 'user' 
-                  ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg shadow-purple-500/50' 
-                  : 'bg-white/10 backdrop-blur-md text-purple-50 border border-white/20 shadow-lg'
-              }`}>
-                <p className="text-sm font-semibold mb-1 opacity-70">
-                  {msg.role === 'user' ? 'You' : 'AI Assistant'}
-                </p>
-                <p className="leading-relaxed">{msg.content}</p>
+            )}
+            
+            {messages.map((msg, idx) => (
+              <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-fadeIn`}>
+                <div className={`max-w-[80%] rounded-2xl px-5 py-3 ${
+                  msg.role === 'user' 
+                    ? 'bg-[#1f2121] text-white shadow-sm' 
+                    : 'bg-[#191a1a] text-white border-[#D4A5A5] shadow-sm'
+                }`}>
+                  <p className="text-sm font-semibold mb-1 opacity-80">
+                    {msg.role === 'user' ? 'Me' : 'AI Assistant'}
+                  </p>
+                  <p className="leading-relaxed font-medium">{msg.content}</p>
+                </div>
               </div>
-            </div>
-          ))}
-          
-          {isProcessing && (
-            <div className="flex justify-start animate-fadeIn">
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl px-5 py-3 border border-white/20">
-                <div className="flex items-center gap-2">
-                  <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+            ))}
+            
+            {isProcessing && (
+              <div className="flex justify-start animate-fadeIn">
+                <div className="bg-[#E8D4C4] rounded-2xl px-5 py-3 border border-[#D4A5A5]">
+                  <div className="flex items-center gap-2">
+                    <div className="flex gap-1">
+                      <div className="w-2 h-2 bg-[#9B7E7E] rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-[#9B7E7E] rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                      <div className="w-2 h-2 bg-[#9B7E7E] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    </div>
+                    <span className="text-[#6B4F4F] text-sm font-medium">Thinking...</span>
                   </div>
-                  <span className="text-purple-300 text-sm">Thinking...</span>
+                </div>
+              </div>
+            )}
+            
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Controls */}
+          <div className="bg-[#191a1a] rounded-2xl p-6 border border-[#2b2d2d] shadow-sm">
+            {/* Voice status */}
+            {(isListening || isSpeaking) && (
+              <div className="mb-4 text-center">
+                {isListening && (
+                  <div className="flex items-center justify-center gap-2 text-[#8B6F6F] animate-pulse">
+                    <Mic className="w-5 h-5" />
+                    <span className="font-medium">Listening... {transcript && `"${transcript}"`}</span>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Input area */}
+            <div className="flex gap-3 mb-1">
+              <input
+                type="text"
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && !isProcessing && handleSendMessage()}
+                placeholder="Type your question..."
+                disabled={isProcessing}
+                className="flex-1 bg-[#1f2121] border-2 border-[#2b2d2d] rounded-xl px-4 py-3 text-white placeholder:text-[#626560] focus:outline-none focus:ring-2 focus:ring-[#2b2d2d] focus:border-transparent disabled:opacity-50 font-medium"
+              />
+              <button
+                onClick={() => handleSendMessage()}
+                disabled={isProcessing || !inputText.trim()}
+                className="mt-2 bg-[#393E46] disabled:opacity-50 hover:bg-[#393E46] hover:opacity-80 disabled:cursor-not-allowed text-white rounded-lg font-semibold transition-all duration-200 shadow-sm flex w-9 h-9 items-center justify-center"
+              >
+                <Send className="w-4 h-4" />
+              </button>
+              <button
+                onClick={isSpeaking ? stopSpeaking : () => setAutoSpeak(!autoSpeak)}
+                className={`flex mt-2 items-center justify-center w-9 h-9 rounded-lg font-semibold transition-all duration-200 shadow-sm text-sm ${
+                  isSpeaking
+                    ? 'bg-[#FF0000] opacity-50 hover:bg-[#FF0000] hover:opacity-100 text-white'
+                    : autoSpeak
+                    ? 'bg-[#393E46] opacity-100 hover:bg-[#393E46] hover:opacity-80 text-white'
+                    : 'bg-[#FF0000] opacity-50 hover:bg-[#FF0000] hover:opacity-100 text-white border-[#D4A5A5]'
+                }`}
+              >
+                {isSpeaking ? (
+                  <VolumeX className="w-4 h-4" />
+                ) : autoSpeak ? (
+                  <Volume2 className="w-4 h-4" />
+                ) : (
+                  <VolumeX className="w-4 h-4" />
+                )}
+              </button>
+
+              <div className="group relative">
+                <button
+                  onClick={isListening ? stopListening : startListening}
+                  disabled={isProcessing}
+                  className={`flex mt-2 items-center justify-center p-2 rounded-lg font-semibold transition-all duration-200 shadow-sm ${
+                    isListening
+                      ? 'bg-[#4561a8] opacity-75 hover:bg-[#4561a8] hover:opacity-100 text-white'
+                      : 'bg-[#6495ED] opacity-75 hover:bg-[#6495ED] hover:opacity-100 text-white'
+                  } disabled:opacity-100 disabled:cursor-not-allowed`}
+                  title={isListening ? 'Stop Recording' : 'Start Voice Input'}
+                >
+                  {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-5 h-5" />}
+                </button>
+                <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-[#6B4F4F] text-white text-xs py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none font-medium">
+                  {isListening ? 'Stop Recording' : 'Start Voice Input'}
                 </div>
               </div>
             </div>
-          )}
-          
-          <div ref={messagesEndRef} />
-        </div>
-
-        {/* Controls */}
-        <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 shadow-2xl">
-          {/* Voice status */}
-          {(isListening || isSpeaking) && (
-            <div className="mb-4 text-center">
-              {isListening && (
-                <div className="flex items-center justify-center gap-2 text-purple-300 animate-pulse">
-                  <Mic className="w-5 h-5" />
-                  <span>Listening... {transcript && `"${transcript}"`}</span>
-                </div>
-              )}
-              {isSpeaking && (
-                <div className="flex items-center justify-center gap-2 text-blue-300 animate-pulse">
-                  <Volume2 className="w-5 h-5" />
-                  <span>Speaking...</span>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Input area */}
-          <div className="flex gap-3 mb-4">
-            <input
-              type="text"
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && !isProcessing && handleSendMessage()}
-              placeholder="Type your question..."
-              disabled={isProcessing}
-              className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-purple-300/50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent disabled:opacity-50 backdrop-blur-sm"
-            />
-            <button
-              onClick={() => handleSendMessage()}
-              disabled={isProcessing || !inputText.trim()}
-              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl px-6 py-3 font-semibold transition-all duration-200 shadow-lg shadow-purple-500/50 hover:shadow-xl hover:shadow-purple-500/70 flex items-center gap-2"
-            >
-              <Send className="w-5 h-5" />
-              Send
-            </button>
-          </div>
-
-          {/* Action buttons */}
-          <div className="flex gap-3 justify-center flex-wrap">
-            <button
-              onClick={isListening ? stopListening : startListening}
-              disabled={isProcessing}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-200 shadow-lg ${
-                isListening
-                  ? 'bg-red-600 hover:bg-red-700 text-white shadow-red-500/50'
-                  : 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white shadow-purple-500/50'
-              } disabled:opacity-50 disabled:cursor-not-allowed`}
-            >
-              {isListening ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
-              {isListening ? 'Stop Recording' : 'Start Voice Input'}
-            </button>
-
-            <button
-              onClick={isSpeaking ? stopSpeaking : () => setAutoSpeak(!autoSpeak)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-200 shadow-lg ${
-                isSpeaking
-                  ? 'bg-red-600 hover:bg-red-700 text-white shadow-red-500/50'
-                  : autoSpeak
-                  ? 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-green-500/50'
-                  : 'bg-white/10 hover:bg-white/20 text-white border border-white/20'
-              }`}
-            >
-              {isSpeaking ? (
-                <>
-                  <VolumeX className="w-5 h-5" />
-                  Stop Speaking
-                </>
-              ) : autoSpeak ? (
-                <>
-                  <Volume2 className="w-5 h-5" />
-                  Voice On
-                </>
-              ) : (
-                <>
-                  <VolumeX className="w-5 h-5" />
-                  Voice Off
-                </>
-              )}
-            </button>
           </div>
         </div>
-
-        {/* Footer */}
-        <footer className="text-center mt-6 text-purple-300/50 text-sm">
-          <p>Created for 100x Generative AI Developer Assessment</p>
-        </footer>
       </div>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;500;600&display=swap');
         
         @keyframes fadeIn {
           from {
@@ -380,17 +370,17 @@ Achievements & Engagements
         }
         
         ::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.05);
+          background: #F5E6D3;
           border-radius: 10px;
         }
         
         ::-webkit-scrollbar-thumb {
-          background: rgba(168, 85, 247, 0.5);
+          background: #D4A5A5;
           border-radius: 10px;
         }
         
         ::-webkit-scrollbar-thumb:hover {
-          background: rgba(168, 85, 247, 0.7);
+          background: #9B7E7E;
         }
       `}</style>
     </div>
